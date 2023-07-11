@@ -1,15 +1,12 @@
 #include "SkipList/skip_list.hpp"
 #include "Json/json.hpp"
-#include "BufferPool/buffer_pool.hpp"
+#include "ThreadPool/thread_pool.hpp"
 
 using namespace std;
 
 
 int main(int argc, char** argv) {
-    if (argc != 2) {
-        cout << "please input skiplist, json or bufferpool" << endl;
-        return 0;
-    }
+
     if (string(argv[1]) == "skiplist") {
         auto cmp = [](const string& a, const string& b) {return a.length() < b.length(); };
         skip_list<string, int, decltype(cmp)> mp(cmp);

@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -g -O2
+CFLAGS = -Wall -g -O2 -std=c++17
 SRC_DIR = . SkipList Json BufferPool
 SRCFLAGS = $(foreach dir, $(SRC_DIR), $(wildcard $(dir)/*.cpp) $(wildcard $(dir)/*.cc) $(wildcard $(dir)/*.c))
 
@@ -19,4 +19,4 @@ new: $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(INCFLGS) $(LIBFLGS) $(LIBS)
 
 clean:
-	del *.exe
+	rm *.out

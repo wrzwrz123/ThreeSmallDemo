@@ -1,5 +1,5 @@
-#ifndef _SKIPLIST_H_
-#define _SKIPLIST_H_
+#ifndef _SKIPLIST_HPP_
+#define _SKIPLIST_HPP_
 
 #include <set>
 #include <string>
@@ -189,4 +189,4 @@ class skip_list{
 };
 
 
-#endif // _SKIPLIST_H_
+#endif // _SKIPLIST_HPP_
