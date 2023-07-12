@@ -15,7 +15,7 @@ LIBFLGS =
 
 all: new.out
 
-new: $(OBJECTS)
+new.out: $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(INCFLGS) $(LIBFLGS) $(LIBS) -lpthread
 
 clean:

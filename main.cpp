@@ -26,9 +26,14 @@ int main(int argc, char** argv) {
         for (auto it = mp.begin(); it != mp.end(); it++) {
             cout << it->key << " " << it->value << endl;
         }
-    } else if (string(argv[1]) == "json") {
+        return 0;
+    }
 
-    } else if (string(argv[1]) == "threadpool") {
+    if (string(argv[1]) == "json") {
+        return 0;
+    }
+
+    if (string(argv[1]) == "threadpool") {
         thread_pool pool(8);
         int n = 20;
         for (int i = 1; i <= n; i++) {
@@ -40,9 +45,8 @@ int main(int argc, char** argv) {
                 cout << "id : " << id << endl;
                 }, i);
         }
-    } else {
-        cout << "please input skiplist, json or bufferpool" << endl;
         return 0;
     }
+    cout << "please input skiplist, json or bufferpool" << endl;
     return 0;
 }
