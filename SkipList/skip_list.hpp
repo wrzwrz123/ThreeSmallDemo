@@ -8,6 +8,8 @@
 
 using namespace std;
 
+#define INT_MAX 0x7fffffff 
+
 template<typename T>
 struct Less {
     bool operator () (const T & a, const T & b) {

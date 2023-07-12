@@ -13,10 +13,10 @@ LIBS =
 
 LIBFLGS = 
 
-all: new
+all: new.out
 
 new: $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(INCFLGS) $(LIBFLGS) $(LIBS)
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(INCFLGS) $(LIBFLGS) $(LIBS) -lpthread
 
 clean:
 	rm *.out

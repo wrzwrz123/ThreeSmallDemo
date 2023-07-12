@@ -4,8 +4,18 @@
 
 using namespace std;
 
+mutex _m;
 
 int main(int argc, char** argv) {
+    if (argc == 1) {
+        cout << __cplusplus << endl;
+        return 0;
+    }
+    
+    if (argc > 2) {
+        cout << "please input skiplist, json or bufferpool" << endl;
+        return 0;
+    }
 
     if (string(argv[1]) == "skiplist") {
         auto cmp = [](const string& a, const string& b) {return a.length() < b.length(); };
@@ -18,8 +28,18 @@ int main(int argc, char** argv) {
         }
     } else if (string(argv[1]) == "json") {
 
-    } else if (string(argv[1]) == "bufferpool") {
-
+    } else if (string(argv[1]) == "threadpool") {
+        thread_pool pool(8);
+        int n = 20;
+        for (int i = 1; i <= n; i++) {
+            pool.submit([](int id) {
+                if (id % 2 == 1) {
+                    this_thread::sleep_for(0.2s);
+                }
+                unique_lock<mutex> lc(_m);
+                cout << "id : " << id << endl;
+                }, i);
+        }
     } else {
         cout << "please input skiplist, json or bufferpool" << endl;
         return 0;

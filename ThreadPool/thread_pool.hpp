@@ -49,11 +49,13 @@ struct safe_queue {
 };
 
 class thread_pool {
-private:
+  private:
     class worker {
-    public:
+      public:
         thread_pool* pool;
+
         worker(thread_pool* _pool) : pool{ _pool } {}
+
         void operator ()() {
             while (!pool->is_shut_down) {
                 {
@@ -71,7 +73,8 @@ private:
             }
         }
     };
-public:
+
+  public:
     bool is_shut_down;
     safe_queue<std::function<void()>> que;
     vector<std::thread>threads;
@@ -81,6 +84,7 @@ public:
     thread_pool(int n) : threads(n), is_shut_down{ false } {
         for (auto& t : threads)t = thread{ worker(this) };
     }
+
     thread_pool(const thread_pool&) = delete;
     thread_pool(thread_pool&&) = delete;
     thread_pool& operator=(const thread_pool&) = delete;
@@ -89,7 +93,7 @@ public:
     template <typename F, typename... Args>
     auto submit(F&& f, Args &&...args) -> std::future<decltype(f(args...))> {
         function<decltype(f(args...))()> func = [&f, args...]() {return f(args...); };
-        auto task_ptr = std::make_shared<std::packaged_task<decltype(f(args...))()>>(func);
+        auto task_ptr = std::make_shared<std::packaged_task<decltype(f(args...))()>> (func);
         std::function<void()> warpper_func = [task_ptr]() {
             (*task_ptr)();
         };
@@ -108,8 +112,5 @@ public:
         }
     }
 };
-
-
-
 
 #endif // _THREADPOOL_HPP_
